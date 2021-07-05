@@ -10,7 +10,7 @@ public class Person {
 
     private String name;
 
-    private String age;
+    private Integer age;
 
     public String getName() {
         return name;
@@ -20,18 +20,18 @@ public class Person {
         this.name = name;
     }
 
-    public String getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
     public Person() {
     }
 
-    public Person(String name, String age) {
+    public Person(String name, Integer age) {
         this.name = name;
         this.age = age;
     }
