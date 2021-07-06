@@ -3,6 +3,7 @@ package com.study.config;
 import com.study.model.Person;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 /**
  * @program: spring-annotation
@@ -13,7 +14,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MainConfig {
 
-    @Bean
+    @Scope(value = "prototype") // 单例 singleton， 多例 prototype
+    @Bean(name = "person666")
     public Person person() {
         return new Person("chenchen", 25);
     }
