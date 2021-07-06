@@ -102,4 +102,13 @@ public class TestFile {
         logger.info("person,person2==>{}", person == person2);
     }
 
+    @Test
+    public void test06() {
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainConfig.class);
+        String[] beanNamesForType = applicationContext.getBeanNamesForType(Person.class);
+        for (String beanName : beanNamesForType) {
+            System.out.println(beanName);
+        }
+    }
+
 }
