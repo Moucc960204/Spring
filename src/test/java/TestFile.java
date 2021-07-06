@@ -20,7 +20,7 @@ public class TestFile {
     private static final Logger logger = LoggerFactory.getLogger(TestFile.class);
 
     /**
-     * 通过xml配置
+     * 通过xml配置加载bean
      */
     @Test
     public void test01() {
@@ -30,7 +30,7 @@ public class TestFile {
     }
 
     /**
-     * 通过注解配置
+     * 通过注解配置加载bean
      */
     @Test
     public void test02() {
@@ -39,19 +39,52 @@ public class TestFile {
         System.out.println(person);
         logger.info("person==>{}", JSONObject.toJSONString(person));
         Person person1 = applicationContext.getBean(Person.class);
-        System.out.println(person1);
         logger.info("person1==>{}", JSONObject.toJSONString(person1));
         logger.info("person,person1==>{}", person == person1);
+
         String applicationName = applicationContext.getApplicationName();
         logger.info("applicationName==>{}", applicationName);
+
         String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
         for (String beanDefinitionName : beanDefinitionNames) {
             logger.info("beanDefinitionName==>{}", beanDefinitionName);
         }
+
         String[] beanNamesForType = applicationContext.getBeanNamesForType(Person.class);
         for (String beanName : beanNamesForType) {
             logger.info("beanName==>{}", beanName);
         }
+    }
+
+    /**
+     * 通过xml配置包扫描
+     */
+    @Test
+    public void test03() {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application-context.xml");
+
+        String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
+        for (String beanDefinitionName : beanDefinitionNames) {
+            logger.info("beanDefinitionName==>{}", beanDefinitionName);
+        }
+
+        Environment environment = applicationContext.getEnvironment();
+        logger.info("environment==>{}", JSONObject.toJSONString(environment));
+        logger.info("osName==>{}", environment.getProperty("os.name"));
+    }
+
+    /**
+     * 通过注解配置包扫描
+     */
+    @Test
+    public void test04() {
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainConfig.class);
+
+        String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
+        for (String beanDefinitionName : beanDefinitionNames) {
+            logger.info("beanDefinitionName==>{}", beanDefinitionName);
+        }
+
         Environment environment = applicationContext.getEnvironment();
         logger.info("environment==>{}", JSONObject.toJSONString(environment));
         logger.info("osName==>{}", environment.getProperty("os.name"));
@@ -61,7 +94,7 @@ public class TestFile {
      * 延迟加载 只针对单例模式有效
      */
     @Test
-    public void test03() {
+    public void test05() {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainConfig.class);
         logger.info("ioc容器创建完成");
         Person person = applicationContext.getBean(Person.class);
