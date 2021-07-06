@@ -3,6 +3,7 @@ package com.study.config;
 import com.study.model.Person;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 
 /**
@@ -14,10 +15,11 @@ import org.springframework.context.annotation.Scope;
 @Configuration
 public class MainConfig {
 
-    @Scope(value = "prototype") // 单例 singleton， 多例 prototype
-    @Bean(name = "person666")
+    @Lazy
+    @Bean(name = "person")
     public Person person() {
-        return new Person("chenchen", 25);
+        System.out.println("向Spring容器中添加Person对象");
+        return new Person("Moucc", 25);
     }
 
 }

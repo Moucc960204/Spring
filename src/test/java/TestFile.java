@@ -9,8 +9,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.env.Environment;
 
-import javax.xml.transform.Source;
-
 /**
  * @program: spring-annotation
  * @description:
@@ -21,6 +19,9 @@ public class TestFile {
 
     private static final Logger logger = LoggerFactory.getLogger(TestFile.class);
 
+    /**
+     * 通过xml配置
+     */
     @Test
     public void test01() {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application-context.xml");
@@ -28,6 +29,9 @@ public class TestFile {
         logger.info("person==>{}", JSONObject.toJSONString(person));
     }
 
+    /**
+     * 通过注解配置
+     */
     @Test
     public void test02() {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainConfig.class);
@@ -51,6 +55,18 @@ public class TestFile {
         Environment environment = applicationContext.getEnvironment();
         logger.info("environment==>{}", JSONObject.toJSONString(environment));
         logger.info("osName==>{}", environment.getProperty("os.name"));
+    }
+
+    /**
+     * 延迟加载 只针对单例模式有效
+     */
+    @Test
+    public void test03() {
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainConfig.class);
+        logger.info("ioc容器创建完成");
+        Person person = applicationContext.getBean(Person.class);
+        Person person2 = applicationContext.getBean(Person.class);
+        logger.info("person,person2==>{}", person == person2);
     }
 
 }
