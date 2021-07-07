@@ -4,7 +4,10 @@ import com.study.condition.LinuxCondition;
 import com.study.condition.WindowCondition;
 import com.study.model.Person;
 import com.study.model.Student;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * @program: spring-annotation
@@ -17,7 +20,7 @@ import org.springframework.context.annotation.*;
 //@ComponentScan(basePackages = "com.study", includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, classes = {Repository.class, Service.class})}, useDefaultFilters = false)
 //@ComponentScan(basePackages = "com.study", includeFilters = {@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {BookService.class, BookRepository.class})}, useDefaultFilters = false)
 //@ComponentScan(basePackages = "com.study", includeFilters = {@ComponentScan.Filter(type = FilterType.CUSTOM, classes = {MyTypeFilter.class})}, useDefaultFilters = false)
-@Import({Student.class, MyImportSelector.class})
+@Import({Student.class, MyImportSelector.class, MyImportBeanDefinitionRegistrar.class})
 public class MainConfig {
 
     // @Lazy
