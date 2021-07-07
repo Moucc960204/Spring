@@ -3,6 +3,7 @@ package com.study.config;
 import com.study.condition.LinuxCondition;
 import com.study.condition.WindowCondition;
 import com.study.model.Person;
+import com.study.model.Student;
 import org.springframework.context.annotation.*;
 
 /**
@@ -12,10 +13,11 @@ import org.springframework.context.annotation.*;
  * @create: 2021-07-05 16:06
  **/
 @Configuration
-@ComponentScan(basePackages = "com.study")
+//@ComponentScan(basePackages = "com.study")
 //@ComponentScan(basePackages = "com.study", includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, classes = {Repository.class, Service.class})}, useDefaultFilters = false)
 //@ComponentScan(basePackages = "com.study", includeFilters = {@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {BookService.class, BookRepository.class})}, useDefaultFilters = false)
 //@ComponentScan(basePackages = "com.study", includeFilters = {@ComponentScan.Filter(type = FilterType.CUSTOM, classes = {MyTypeFilter.class})}, useDefaultFilters = false)
+@Import({Student.class, MyImportSelector.class})
 public class MainConfig {
 
     // @Lazy
